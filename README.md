@@ -9,4 +9,4 @@
 * JPA
 * JSF
 * JSF
-* primefaces
+* Primefaces
