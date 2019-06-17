@@ -1,6 +1,6 @@
-# projeto-spring
+# Projeto spring
 
-####Tecnologias utilizadas:
+#### Tecnologias utilizadas:
 
 * SppringBoot Framework
 * Postgresql
