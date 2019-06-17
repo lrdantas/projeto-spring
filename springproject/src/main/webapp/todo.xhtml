@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<h1>Cadastro de tarefas</h1>
+
+	<h:form id="frmTodo">
+		Tarefa: <p:inputText value="#{todoController.todo.name}" />
+		Feito:  <p:selectBooleanButton id="value1" value="#{todoController.todo.done}" onLabel="Yes" offLabel="No" style="width:60px" />	
+		<p:commandButton action="#{todoController.salvar}" value="Salvar">
+			<f:ajax execute="frmTodo" render="dtTodo"></f:ajax>
+		</p:commandButton>
+		
+		<p:commandButton rendered="#{todoController.modoEdicao}" action="#{todoController.cancelar}" value="Cancelar">
+			<f:ajax render="frmTodo"></f:ajax>
+		</p:commandButton>
+
+
+		<p:dataTable value="#{todoController.todos}" var="c"
+			id="dtTodo">
+			<p:column>
+				<f:facet name="header">ID</f:facet>
+				#{c.id}
+			</p:column>
+			<p:column>
+				<f:facet name="header">Tarefa</f:facet>
+				#{c.name}
+			</p:column>
+			<p:column>
+				<f:facet name="header">Feito</f:facet>
+				#{c.done}
+			</p:column>
+			
+			<p:column>
+				<f:facet name="header">Ação</f:facet>
+				<p:commandButton action="#{todoController.excluir(c)}" value="Excluir" onclick="return window.confirm('Certeza?')" >
+					<f:ajax  render="frmTodo:dtTodo"/>
+				</p:commandButton>
+				
+				<p:commandButton action="#{todoController.editar(c)}" value="Editar" >
+					<f:ajax  render="frmTodo"/>
+				</p:commandButton>
+				
+			</p:column>
+			
+			
+		</p:dataTable>
+	</h:form>
+
+</body>
+</html>
