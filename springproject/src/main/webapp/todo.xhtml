@@ -12,12 +12,12 @@
 
 	<h:form id="frmTodo">
 		Tarefa: <p:inputText value="#{todoController.todo.name}" />
-		Feito:  <p:selectBooleanButton id="value1" value="#{todoController.todo.done}" onLabel="Yes" offLabel="No" style="width:60px" />	
+		Feito:  <p:selectBooleanButton id="value1" value="#{todoController.todo.done}" onLabel="Sim" offLabel="Não" style="width:60px" />	
 		<p:commandButton action="#{todoController.salvar}" value="Salvar">
 			<f:ajax execute="frmTodo" render="dtTodo"></f:ajax>
 		</p:commandButton>
 		
-		<p:commandButton rendered="#{todoController.modoEdicao}" action="#{todoController.cancelar}" value="Cancelar">
+		<p:commandButton rendered="#{todoController.updating}" action="#{todoController.cancelar}" value="Cancelar">
 			<f:ajax render="frmTodo"></f:ajax>
 		</p:commandButton>
 

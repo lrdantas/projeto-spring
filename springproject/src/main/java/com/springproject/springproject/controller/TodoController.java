@@ -21,8 +21,10 @@ public class TodoController {
 	private List<Todo> todos;
 	
 	private Todo todo =  new Todo();
+	
+	private String status = "Pendente";
 
-	private boolean modoEdicao=false;
+	private boolean updating=false;
 	
 	@PostConstruct
 	public void init() {
@@ -31,10 +33,10 @@ public class TodoController {
 	public void salvar(){
 		
 		todoRepository.save(todo);
-		if(!isModoEdicao())
+		if(!isUpdating())
 			todos.add(todo);
 		todo = new Todo();
-		setModoEdicao(false);
+		setUpdating(false);
 	}
 
 	public void excluir(Todo todo){
@@ -44,18 +46,17 @@ public class TodoController {
 	
 	public void editar(Todo todo){
 		setTodo(todo);
-		setModoEdicao(true);
+		setUpdating(true);
 	}
 	
 	public void cancelar(){
 		todo = new Todo();
-		setModoEdicao(false);
+		setUpdating(false);
 	}
 
 	public Todo getTodo() {
 		return todo;
 	}
-
 
 	public void setTodo(Todo todo) {
 		this.todo = todo;
@@ -66,12 +67,24 @@ public class TodoController {
 	public void setTodos(List<Todo> todos) {
 		this.todos = todos;
 	}
-	public boolean isModoEdicao() {
-		return modoEdicao;
+	public boolean isUpdating() {
+		return updating;
 	}
-	public void setModoEdicao(boolean modoEdicao) {
-		this.modoEdicao = modoEdicao;
+	public void setUpdating(boolean updating) {
+		this.updating = updating;
+	}
+	public TodoRepository getTodoRepository() {
+		return todoRepository;
+	}
+	public void setTodoRepository(TodoRepository todoRepository) {
+		this.todoRepository = todoRepository;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(Todo todo) {
+		if(todo.isDone())
+			this.status = "Realizado";
 	}
 	
-
 }
