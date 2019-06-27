@@ -8,19 +8,18 @@
 <h:head></h:head>
 <body>
 
+	
+ 
+	
 	<h1>Cadastro de tarefas</h1>
+	
 
 	<h:form id="frmTodo">
-		Tarefa: <p:inputText value="#{todoController.todo.name}" />
-		Feito:  <p:selectBooleanButton id="value1" value="#{todoController.todo.done}" onLabel="Sim" offLabel="Não" style="width:60px" />	
-		<p:commandButton action="#{todoController.salvar}" value="Salvar">
-			<f:ajax execute="frmTodo" render="dtTodo"></f:ajax>
-		</p:commandButton>
+		<p:outputLabel for="@next" value="Tarefa:  " style="font-size:20px;" /> <p:inputText value="#{todoController.todo.name}" />
+		<p:outputLabel for="@next" value="  Feito:  " style="font-size:20px;"/>  <p:selectBooleanButton id="value1" value="#{todoController.todo.done}" onLabel="Sim" offLabel="Não" style="width:60px" />	
+		<p:commandButton action="#{todoController.salvar}" value="Salvar"  process="frmTodo" update="dtTodo"/>
 		
-		<p:commandButton rendered="#{todoController.updating}" action="#{todoController.cancelar}" value="Cancelar">
-			<f:ajax render="frmTodo"></f:ajax>
-		</p:commandButton>
-
+		<p:commandButton rendered="#{todoController.updating}" action="#{todoController.cancelar}" value="Cancelar" update="frmTodo" />
 
 		<p:dataTable value="#{todoController.todos}" var="c"
 			id="dtTodo">
@@ -34,18 +33,15 @@
 			</p:column>
 			<p:column>
 				<f:facet name="header">Feito</f:facet>
-				#{c.done}
+				#{c.getStatus()}
 			</p:column>
 			
 			<p:column>
 				<f:facet name="header">Ação</f:facet>
-				<p:commandButton action="#{todoController.excluir(c)}" value="Excluir" onclick="return window.confirm('Certeza?')" >
-					<f:ajax  render="frmTodo:dtTodo"/>
-				</p:commandButton>
+				<p:commandButton action="#{todoController.excluir(c)}" value="Excluir" onclick="return window.confirm('Certeza?')" update="frmTodo:dtTodo"/>
 				
-				<p:commandButton action="#{todoController.editar(c)}" value="Editar" >
-					<f:ajax  render="frmTodo"/>
-				</p:commandButton>
+				<p:commandButton action="#{todoController.editar(c)}" value="Editar" update="frmTodo"/>
+					
 				
 			</p:column>
 			

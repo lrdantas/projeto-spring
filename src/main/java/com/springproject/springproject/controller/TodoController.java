@@ -30,8 +30,7 @@ public class TodoController {
 	public void init() {
 		setTodos(todoRepository.findAll());
 	}
-	public void salvar(){
-		
+	public void salvar(){		
 		todoRepository.save(todo);
 		if(!isUpdating())
 			todos.add(todo);
@@ -80,11 +79,10 @@ public class TodoController {
 		this.todoRepository = todoRepository;
 	}
 	public String getStatus() {
-		return status;
-	}
-	public void setStatus(Todo todo) {
 		if(todo.isDone())
-			this.status = "Realizado";
+			return "Realizado";
+		else
+			return "Pendente";
 	}
 	
 }

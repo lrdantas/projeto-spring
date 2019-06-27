@@ -49,6 +49,13 @@ public class Todo {
 
 		public void setDone(boolean done) {
 			this.done = done;
-		}    
+		}
+		
+		public String getStatus() {
+			if(isDone())
+				return "Realizado";
+			else
+				return "Pendente";
+		}
 
 }
