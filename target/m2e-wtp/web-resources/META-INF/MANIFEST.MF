@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: springproject
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: rodrigo
+Implementation-Vendor-Id: com.springproject
+Build-Jdk: 1.8.0_111
+Implementation-URL: http://persapiens.org/springproject
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: JoinFaces
+
